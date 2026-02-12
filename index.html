@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <title>Kinda Rock Paper Scissors 2</title>
-    <link rel="stylesheet" href="rock-paper-scissors.css">
+    <title>Kinda Rock Paper Scissors</title>
+    <link rel="stylesheet" href="rock-paper-scissors.css" />
   </head>
   <body>
     <p class="title">Kinda Rock Paper Scissors</p>
@@ -10,105 +10,105 @@
     <p>Coffee beats Sleep &#40;Caffiene &#128267; &#9889;&#41;</p>
     <p>Alarm beats Coffee &#40;no excuses &#9200; &#129393; &#41;</p>
 
-    <button class="move-button" onclick="
-      playGame('sleep'); 
-    "><img src="sleep.png" class="move-icon" ></button>
+    <button class="move-button" onclick="playGame('sleep')">
+      <img src="sleep.png" class="move-icon" />
+    </button>
 
-    <button class="move-button" onclick="
-      playGame('coffee');
-    "><img src="coffee.png" class="move-icon" ></button>
+    <button class="move-button" onclick="playGame('coffee')">
+      <img src="coffee.png" class="move-icon" />
+    </button>
 
-    <button class="move-button" onclick="
-      playGame('alarm');
-    "><img src="alarm.png" class="move-icon" ></button>
+    <button class="move-button" onclick="playGame('alarm')">
+      <img src="alarm.png" class="move-icon" />
+    </button>
     <p class="js-result result"></p>
-    <p class="js-moves">
-    </p>
-    <p class = "js-score score"></p>
+    <p class="js-moves"></p>
+    <p class="js-score score"></p>
 
-    <button class="reset-score-button" onclick="
-      score.wins = 0;
-      score.losses = 0;
-      score.ties = 0;
-      localStorage.removeItem('score');
-      updateScoreElement();
-    ">Reset Score</button>
+    <button
+      class="reset-score-button"
+      onclick="
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+        localStorage.removeItem('score');
+        updateScoreElement();
+      "
+    >
+      Reset Score
+    </button>
 
     <script>
-      let score = JSON.parse(localStorage.getItem('score')) || {
+      let score = JSON.parse(localStorage.getItem("score")) || {
         wins: 0,
         losses: 0,
-        ties: 0
+        ties: 0,
       };
       updateScoreElement();
-
 
       function playGame(playerMove) {
         const computerMove = pickComputerMove();
 
-        let result = '';
+        let result = "";
 
-        if (playerMove === 'alarm') {
-          if (computerMove === 'sleep') {
-            result = 'You lose.';
-          } else if (computerMove === 'coffee') {
-            result = 'You win.';
-          } else if (computerMove === 'alarm') {
-            result = 'Tie.';
+        if (playerMove === "alarm") {
+          if (computerMove === "sleep") {
+            result = "You lose.";
+          } else if (computerMove === "coffee") {
+            result = "You win.";
+          } else if (computerMove === "alarm") {
+            result = "Tie.";
           }
-
-        } else if (playerMove === 'coffee') {
-          if (computerMove === 'sleep') {
-            result = 'You win.';
-          } else if (computerMove === 'coffee') {
-            result = 'Tie.';
-          } else if (computerMove === 'alarm') {
-            result = 'You lose.';
+        } else if (playerMove === "coffee") {
+          if (computerMove === "sleep") {
+            result = "You win.";
+          } else if (computerMove === "coffee") {
+            result = "Tie.";
+          } else if (computerMove === "alarm") {
+            result = "You lose.";
           }
-          
-        } else if (playerMove === 'sleep') {
-          if (computerMove === 'sleep') {
-            result = 'Tie.';
-          } else if (computerMove === 'coffee') {
-            result = 'You lose.';
-          } else if (computerMove === 'alarm') {
-            result = 'You win.';
+        } else if (playerMove === "sleep") {
+          if (computerMove === "sleep") {
+            result = "Tie.";
+          } else if (computerMove === "coffee") {
+            result = "You lose.";
+          } else if (computerMove === "alarm") {
+            result = "You win.";
           }
         }
 
-        if (result === 'You win.') {
+        if (result === "You win.") {
           score.wins += 1;
-        } else if (result === 'You lose.') {
+        } else if (result === "You lose.") {
           score.losses += 1;
-        } else if (result === 'Tie.') {
+        } else if (result === "Tie.") {
           score.ties += 1;
         }
-        
-        localStorage.setItem('score', JSON.stringify(score));
+
+        localStorage.setItem("score", JSON.stringify(score));
         updateScoreElement();
 
-        document.querySelector('.js-result').innerHTML = result;
-        document.querySelector('.js-moves').innerHTML = 
-        `You 
+        document.querySelector(".js-result").innerHTML = result;
+        document.querySelector(".js-moves").innerHTML = `You 
         <img src="${playerMove}.png" class="move-icon"> 
         <img src="${computerMove}.png" class="move-icon"> 
         Computer`;
       }
       function updateScoreElement() {
-        document.querySelector('.js-score')
-      .innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+        document.querySelector(".js-score").innerHTML =
+          `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
       }
       function pickComputerMove() {
         const randomNumber = Math.random();
 
-        let computerMove = '';
+        let computerMove = "";
 
         if (randomNumber >= 0 && randomNumber < 1 / 3) {
-          computerMove = 'sleep';
+          computerMove = "sleep";
         } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-          computerMove = 'coffee';
+          computerMove = "coffee";
         } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
-          computerMove = 'alarm';
+          computerMove = "alarm";
         }
 
         return computerMove;
